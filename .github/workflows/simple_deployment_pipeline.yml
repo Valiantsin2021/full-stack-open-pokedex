@@ -45,6 +45,7 @@ jobs:
           multipleDeployment: false #optional, default true
   Tag_release:
     needs: [Deployment_to_Render]
+    if: ${{ toJson(github.event.head_commit.message) }} !== '#skip'
     runs-on: ubuntu-20.04
     steps:
       - name: Bump version and push tag
